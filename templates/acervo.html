@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sala de Leitura - Anísio Carneiro</title>
+ <link href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" rel="stylesheet">
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+.container {
+    max-width: 1200px;
+	min-height:500px;
+    margin: 0 auto;
+    padding: 0px;
+}
+
+.header {
+     font-family: 'Dancing Script', cursive; /* Fonte com letras curvas */
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff; /* Cor branca para contraste com o azul */
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    background-color: #3498db; /* Cor azul de fundo */
+    padding: 10px 20px; /* Adicione padding para melhor legibilidade */
+    border-radius: 5px; /* Adicione borda arredondada para o título */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adicione sombra suave */
+}
+
+.navbar {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.navbar li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.navbar a {
+    color: #333333;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar a:hover {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.footer {
+    background-color: #3498db;
+    color: #ffffff;
+    padding: 10px 0;
+    text-align: center;
+}
+</style>
+
+
+<script>
+
+<!--Script para mudar a ordem das datas "YYYY-MM-DD" para "DD/MM/YYYY" -->	
+
+document.addEventListener("DOMContentLoaded", function() {
+  var dataDevolucaoCells = document.querySelectorAll('.data-devolucao');
+
+  dataDevolucaoCells.forEach(function(cell) {
+    var dataDevolucao = cell.textContent.trim();
+    var partesData = dataDevolucao.split('-');
+    var dataFormatada = partesData[2] + '/' + partesData[1] + '/' + partesData[0];
+    cell.textContent = dataFormatada;
+  });
+});
+
+<!--Mudar a data de retirada "YYYY-MM-DD" para "DD/MM/YYYY" -->	
+
+document.addEventListener("DOMContentLoaded", function() {
+  var dataDevolucaoCells = document.querySelectorAll('.data-retirada');
+
+  dataDevolucaoCells.forEach(function(cell) {
+    var dataDevolucao = cell.textContent.trim();
+    var partesData = dataDevolucao.split('-');
+    var dataFormatada = partesData[2] + '/' + partesData[1] + '/' + partesData[0];
+    cell.textContent = dataFormatada;
+  });
+});
+
+</script>
+
+</head>
+<body>
+
+
+ <div class="header">
+        <h1>Sala de Leitura - Anísio Carneiro</h1>
+    </div>
+	
+<div class="container">
+   
+
+    <div class="navbar">
+        <ul>
+            <li><a href="/livros_emprestados">Livros Emprestados</a></li>
+            <li><a href="/cadastro">Cadastro</a></li>
+            <li><a href="/historico">Histórico </a></li>
+			<li><a href="/acervo">Acervo </a></li>
+			
+        </ul>
+    </div>
+
+    <div class="content">
+	
+    <div class="container mt-5">
+        <h1>Acervo</h1>
+		<style>/* Estilo para transformar o link em botão */
+.btn-green {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: green; /* Cor alterada para verde */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none; /* Removendo a borda */
+}
+
+/* Estilo quando o mouse passa sobre o botão */
+.btn-green:hover {
+    background-color: darkgreen; /* Cor alterada para um tom mais escuro de verde */
+}
+
+/* Posicionamento à direita */
+.btn-container {
+    text-align: right;
+}
+
+
+		</style>
+		<div class="btn-container">
+        <ul>
+            <li><a href="/cadastro_acervo" class="btn-green">Cadastrar Acervo</a></li>
+            <!-- Outros itens da lista aqui -->
+        </ul>
+    </div>
+
+        <!-- Tabela de histórico -->
+        <table id="minhaTabela" class="display" style="width:100%">
+            <thead>
+                <tr>
+					
+                    <th>Número do Tombo</th>
+					<th>Livro</th>
+                    <th>Autor</th>
+					<th>Atualizar</th>
+					<th>Deletar</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for acervo in acervo %}
+                    <tr>
+                        
+						<td>{{ acervo.numero_do_tombo }}</td>
+                        <td>{{ acervo.nome_do_livro }}</td>
+                        <td>{{ acervo.autor }}</td>
+						<td><script>
+    function confirmarAtualizar() {
+        return confirm('Tem certeza que deseja atualizar este livro?');
+    }
+</script>
+
+<form action="/atualizar_acervo/{{ acervo.id }}" method="GET" onsubmit="return confirmarAtualizar()">
+    <input type="submit" value="Update">
+</form>
+
+</td>
+
+                        
+						<td><script>
+    function confirmarExclusao() {
+        return confirm('Tem certeza que deseja deletar este livro?');
+    }
+</script>
+
+<form action="/deletar_acervo/{{ acervo.id }}" method="POST" onsubmit="return confirmarExclusao()">
+    <input type="submit" value="Deletar">
+</form>
+
+</td>
+                        
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+		
+		<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+		<script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
+
+		  <script>
+		  $(document).ready(function(){
+			  $('#minhaTabela').DataTable({
+					"language": {
+						"lengthMenu": "Mostrando _MENU_ registros por página",
+						"zeroRecords": "Nada encontrado",
+						"info": "Mostrando página _PAGE_ de _PAGES_",
+						"infoEmpty": "Nenhum registro disponível",
+						"infoFiltered": "(filtrado de _MAX_ registros no total)"
+					}
+				});
+		  });
+		  </script>
+		  
+
+    </div>
+
+ </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2024 Sistema de Empréstimo de Livros. Projeto integrador 1 Univesp.</p>
+</div>
+
+</body>
+</html>
