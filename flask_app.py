@@ -15,10 +15,10 @@ def add_cors_headers(response):
 # Local  Configurações do banco de dados
 
 db_config = {
-    'host': 'projetoint.mysql.pythonanywhere-services.com',
-    'user': 'projetoint',
-    'password': 'databases453453534',
-    'database': 'projetoint$emprestimo'
+    'host': 'projetoint.myss.com',
+    'user': 'teste',
+    'password': 'teste',
+    'database': 'teste'
 }
 
 """
