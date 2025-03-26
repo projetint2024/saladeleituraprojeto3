@@ -80,7 +80,6 @@ body {
 }
 </style>
 
-
 <script>
 
 <!--Script para mudar a ordem das datas "YYYY-MM-DD" para "DD/MM/YYYY" -->	
@@ -114,7 +113,6 @@ document.addEventListener("DOMContentLoaded", function() {
 </head>
 <body>
 
-
  <div class="header">
         <h1>Sala de Leitura - Anísio Carneiro</h1>
     </div>
@@ -127,85 +125,47 @@ document.addEventListener("DOMContentLoaded", function() {
             <li><a href="/livros_emprestados">Livros Emprestados</a></li>
             <li><a href="/cadastro">Cadastro</a></li>
             <li><a href="/historico">Histórico </a></li>
-			<li><a href="/acervo">Acervo </a></li>
-			
+			<li><a href="/acervo">Acervo</a></li>
         </ul>
     </div>
 
     <div class="content">
 	
     <div class="container mt-5">
-        <h1>Acervo</h1>
-		<style>/* Estilo para transformar o link em botão */
-.btn-green {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: green; /* Cor alterada para verde */
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    border: none; /* Removendo a borda */
-}
-
-/* Estilo quando o mouse passa sobre o botão */
-.btn-green:hover {
-    background-color: darkgreen; /* Cor alterada para um tom mais escuro de verde */
-}
-
-/* Posicionamento à direita */
-.btn-container {
-    text-align: right;
-}
-
-
-		</style>
-		<div class="btn-container">
-        <ul>
-            <li><a href="/cadastro_acervo" class="btn-green">Cadastrar Acervo</a></li>
-            <!-- Outros itens da lista aqui -->
-        </ul>
-    </div>
+        <h1>Histórico de Empréstimos</h1>
 
         <!-- Tabela de histórico -->
         <table id="minhaTabela" class="display" style="width:100%">
             <thead>
                 <tr>
-					
+                   
+					<th>Nome</th>
+                    <th>Série</th>
                     <th>Número do Tombo</th>
-					<th>Livro</th>
-                    <th>Autor</th>
-					<th>Atualizar</th>
+                    <th>Livro</th>
+                    <th>Empréstimo</th>
+					<th>Devolução</th>
 					<th>Deletar</th>
                     
                 </tr>
             </thead>
             <tbody>
-                {% for acervo in acervo %}
+                {% for emprestimo in historico %}
                     <tr>
                         
-						<td>{{ acervo.numero_do_tombo }}</td>
-                        <td>{{ acervo.nome_do_livro }}</td>
-                        <td>{{ acervo.autor }}</td>
-						<td><script>
-    function confirmarAtualizar() {
-        return confirm('Tem certeza que deseja atualizar este livro?');
-    }
-</script>
-
-<form action="/atualizar_acervo/{{ acervo.id }}" method="GET" onsubmit="return confirmarAtualizar()">
-    <input type="submit" value="Update">
-</form>
-
-</td>
-
-                        
+						<td>{{ emprestimo.nome_aluno }}</td>
+                        <td>{{ emprestimo.serie }}</td>
+                        <td>{{ emprestimo.numero_do_tombo }}</td>
+                        <td>{{ emprestimo.nome_do_livro }}</td>
+                        <td class="data-retirada">{{ emprestimo.data_retirada }}</td>
+                        <td class="data-devolucao">{{ emprestimo.data_devolucao }}</td>
 						<td><script>
     function confirmarExclusao() {
         return confirm('Tem certeza que deseja deletar este livro?');
     }
 </script>
 
-<form action="/deletar_acervo/{{ acervo.id }}" method="POST" onsubmit="return confirmarExclusao()">
+<form action="/deletar_livro/{{ emprestimo.id }}" method="POST" onsubmit="return confirmarExclusao()">
     <input type="submit" value="Deletar">
 </form>
 

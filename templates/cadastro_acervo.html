@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sala de Leitura - Anísio Carneiro</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+.container {
+    max-width: 1200px;
+	min-height:500px;
+    margin: 0 auto;
+    padding: 0px;
+}
+
+.header {
+     font-family: 'Dancing Script', cursive; /* Fonte com letras curvas */
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff; /* Cor branca para contraste com o azul */
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    background-color: #3498db; /* Cor azul de fundo */
+    padding: 10px 20px; /* Adicione padding para melhor legibilidade */
+    border-radius: 5px; /* Adicione borda arredondada para o título */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adicione sombra suave */
+}
+
+.navbar {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.navbar li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.navbar a {
+    color: #333333;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar a:hover {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.footer {
+    background-color: #3498db;
+    color: #ffffff;
+    padding: 10px 0;
+    text-align: center;
+}
+</style>
+
+
+<style>
+
+/* Estilo para o formulário */
+.form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+/* Estilo para os campos do formulário */
+.form-container input[type=text], 
+.form-container input[type=email], 
+.form-container textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 15px 0;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box; /* Garante que o padding não altere a largura total do elemento */
+}
+
+/* Estilo para o botão */
+.form-container button {
+  background-color: #007bff; /* Azul */
+  color: #fff; /* Texto branco */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* Estilo para o botão quando hover */
+.form-container button:hover {
+  background-color: #0056b3; /* Azul mais escuro */
+}
+
+/* Estilo para o campo de data */
+input[type="date"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+/* Estilo para o campo de data quando focado */
+input[type="date"]:focus {
+  outline: none; /* Remove a borda de foco padrão */
+  border-color: #007bff; /* Cor azul quando focado */
+}
+
+
+</style>
+
+</head>
+<body>
+
+ <div class="header">
+        <h1>Sala de Leitura - Anísio Carneiro</h1>
+    </div>
+	
+<div class="container">
+   
+
+    <div class="navbar">
+        <ul>
+            <li><a href="/livros_emprestados">Livros Emprestados</a></li>
+            <li><a href="/cadastro">Cadastro</a></li>
+            <li><a href="/historico">Histórico </a></li>
+			<li><a href="/acervo">Acervo</a></li>	
+			
+        </ul>
+    </div>
+
+    <div class="content">
+     <h1>Cadastro </h1>
+	
+    <form method="post" action="{{ url_for('cadastrar_acervo') }}" class="form-container">
+        <label for="numero_do_tombo">Número do Tombo:</label>
+        <input type="text" name="numero_do_tombo" required>
+        
+        <label for="nome_do_livro">Nome do Livro:</label>
+        <input type="text" name="nome_do_livro" required>
+        
+               
+        <label for="autor">Nome do Autor:</label>
+        <input type="text" name="autor" required>
+        
+       
+        <button type="submit">Cadastrar</button>
+    </form>
+	
+ </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2024 Sistema de Empréstimo de Livros. Projeto integrador 1 Univesp.</p>
+</div>
+
+</body>
+</html>
