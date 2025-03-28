@@ -7,13 +7,6 @@ from kivy.uix.scrollview import ScrollView
 from kivy.graphics import Color, Rectangle
 from kivy.clock import Clock
 
-from kivy.uix.image import Image
-
-class MyApp(App):
-    def build(self):
-        return Image(source='logo.jpg')
-
-
 
 # URL da API
 API_URL = "https://projetoint.pythonanywhere.com/alerta/app"
@@ -120,4 +113,3 @@ class AlertaApp(App):
 
 if __name__ == "__main__":
     AlertaApp().run()
-
